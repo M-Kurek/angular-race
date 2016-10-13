@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>start angular</title>
+</head>
+<body>
+    <h1 ng-controller="HiCtrl">{{helloMessage}} !</h1>
+    <script src="https://code.angularjs.org/1.4.8/angular.js"></script>
+    <script type="text/javascript">
+        angular.module('app', []).controller('HiCtrl',
+            function($scope) {
+                $scope.helloMessage = "Hi baby";
+            }
+        )
+    </script>
+</body>
+</html>
