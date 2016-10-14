@@ -7,10 +7,16 @@ eventsApp.controller('EventController',
 
         $scope.buttonDisabled = true;
 
+        $scope.sortOrder = "['-upVoteCount', 'name']";
+        $scope.sortComplex = "['-upVoteCount', 'name']";
+        $scope.sortVotesOnly = '-upVoteCount';
+        $scope.sortNamesOnly = 'name';
+
         $scope.event = {
-            name : 'App Ang',
+            name : 'Angular_js supported',
             date : '2016-10-12',
             time : '8 pm',
+            price : 23,
             location : {
                 address: "abc",
                 city : "Krk",
@@ -38,7 +44,7 @@ eventsApp.controller('EventController',
                     name : "another session c",
                     creatorName : 'Beta Meta',
                     duration : '5 hr',
-                    level : 'interm',
+                    level : 'intermediate',
                     abstract : 'Lorem ipsum interm interm',
                     upVoteCount : 0
                 },
@@ -52,4 +58,4 @@ eventsApp.controller('EventController',
             session.upVoteCount--;
         }
     }
-);
+)

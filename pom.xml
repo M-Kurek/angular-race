@@ -96,7 +96,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
-					<scanIntervalSeconds>2</scanIntervalSeconds>
+					<!-- scanIntervalSeconds>2</scanIntervalSeconds -->
 				</configuration>
 				<dependencies>
                     <dependency>
