@@ -39,5 +39,12 @@ eventsApp.controller('EventController',
                 },
             ]
         }
+
+        $scope.upVoteSession = function (session) {
+            session.upVoteCount++;
+        }
+        $scope.downVoteSession = function (session) {
+            session.upVoteCount--;
+        }
     }
 );
