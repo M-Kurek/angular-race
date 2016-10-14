@@ -2,6 +2,11 @@
 
 eventsApp.controller('EventController',
     function EventController($scope) {
+
+        $scope.snippet = '<span style="color:red">hi there</span>';
+
+        $scope.buttonDisabled = true;
+
         $scope.event = {
             name : 'App Ang',
             date : '2016-10-12',
