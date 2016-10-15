@@ -8,7 +8,6 @@ eventsApp.controller('EventController',
         $scope.buttonDisabled = true;
 
         $scope.sortOrder = "";
-        $scope.sortComplex = "['-upVoteCount', 'name']";
         $scope.sortVotesOnly = '-upVoteCount';
         $scope.sortNamesOnly = 'name';
 
