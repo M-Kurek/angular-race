@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eventsApp">
+<head>
+    <meta charset="UTF-8">
+    <title><cache></cache> details</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/app.css"/>
+
+</head>
+<body ng-cloak>
+<div class="container">
+
+    <div ng-controller="CacheSampleController" style="padding-left: 20px; padding-right: 20px">
+
+        key : <input ng-model="key" type="text"><br />
+        value : <input ng-model="value" type="text"><br />
+        <button ng-click="addToCache(key, value)" type="submit" class="btn btn-primary">add-2-cache</button>
+
+        <p>
+            check key : <input ng-model="checkKey" type="text"><br />
+            <h4>Value from cache: {{readFromCache(checkKey)}}</h4>
+            <h4>Cache stats : {{getCacheStats()}}</h4>
+
+        </p>
+    </div>
+</div>
+
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular/angular-sanitize.js"></script>
+<script src="/lib/underscore-1.4.4.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/lib/bootstrap.min.js"></script>
+<script src="/js/controllers/CacheSampleController.js"></script>
+</body>
+</html>
