@@ -23,26 +23,26 @@
             <form name="newEventForm">
                 <fieldset>
                     <label for="eventName">Event name:</label>
-                    <input ng-model="event.name" id="eventName" type="text"
+                    <input ng-model="data.event.name" id="eventName" type="text"
                            required placeholder="Propose new name"/>
                     <label for="eventDate">Event date:</label>
-                    <input ng-model="event.date" id="eventDate" type="text"
+                    <input ng-model="data.event.date" id="eventDate" type="text"
                            required ng-pattern="/\d\d/\d\d/\d\d\d\d/" placeholder="date here (mm/dd/yyyy)"/>
                     <label for="eventTime">Starts at:</label>
-                    <input ng-model="event.time" id="eventTime" type="text" placeholder="?"/>
+                    <input ng-model="data.event.time" id="eventTime" type="text" placeholder="?"/>
                     <label for="eventLocation">Event location:</label>
-                    <input ng-model="event.location.address" id="eventLocation" type="text" placeholder="Propose the place"/>
+                    <input ng-model="data.event.location.address" id="eventLocation" type="text" placeholder="Propose the place"/>
                     <br />
-                    <input ng-model="event.location.city" id="eventCity" type="text" class="input-small" placeholder="City?"/>
-                    <input ng-model="event.location.state" id="eventProvince" type="text" class="input-small" placeholder="Province?"/>
+                    <input ng-model="data.event.location.city" id="eventCity" type="text" class="input-small" placeholder="City?"/>
+                    <input ng-model="data.event.location.state" id="eventProvince" type="text" class="input-small" placeholder="Province?"/>
 
                     <label for="eventImageUrl">Event logo:</label>
-                    <input ng-model="event.imgUrl" id="eventImageUrl" type="url" class="input-xlarge" placeholder="Url for image"/>
+                    <input ng-model="data.event.imgUrl" id="eventImageUrl" type="url" class="input-xlarge" placeholder="Url for image"/>
 
                 </fieldset>
-                <div>{{event.name}}</div>
+                <div>{{data.event.name}}</div>
 
-                <img ng-src="{{event.imgUrl}}" src=""/>
+                <img ng-src="{{data.event.imgUrl}}" src=""/>
                 <br />
                 <br />
                 <button ng-click="saveEvent(event, newEventForm)"

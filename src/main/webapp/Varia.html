@@ -11,11 +11,11 @@
 <div class="container">
 
     <div ng-controller="EventController" style="padding-left: 20px; padding-right: 20px">
-        <img ng-src="{{event.imgUrl}}" alt="{{event.name}}"/>
+        <img ng-src="{{data.event.imgUrl}}" alt="{{data.event.name}}"/>
 
         <div class="row">
             <div class="span11">
-                <h2 ng-bind-template="{{event.name | uppercase}} at {{event.date}}"></h2>
+                <h2 ng-bind-template="{{data.event.name | uppercase}} at {{data.event.date}}"></h2>
             </div>
         </div>
         <button class="btn" ng-disabled="buttonDisabled">Disabled</button>
@@ -40,7 +40,7 @@
             <option selected value="1st level">1st level</option>
         </select>
         <ul class="thumbnails">
-            <li ng-repeat="session in event.sessions |orderBy: ['-upVoteCount', 'name'] | filter:query">
+            <li ng-repeat="session in data.event.sessions |orderBy: ['-upVoteCount', 'name'] | filter:query">
                 <div class="row session">
                     <div class="span0 well votingWidget">
                         <div class="votingButton" ng-click="upVoteSession(session)">
