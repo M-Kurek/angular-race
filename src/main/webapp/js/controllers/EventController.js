@@ -1,7 +1,6 @@
 'use strict';
 
-eventsApp.controller('EventController',
-    function EventController($scope, eventData, $log) {
+eventsApp.controller('EventController',    function EventController($scope, eventData, $log) {
 
         $scope.snippet = '<span style="color:red">hi there</span>';
 
@@ -11,11 +10,28 @@ eventsApp.controller('EventController',
         $scope.sortVotesOnly = '-upVoteCount';
         $scope.sortNamesOnly = 'name';
 
+        //with promise
+
         eventData.getEvent()
-            .success(function (event) {$scope.event = event})
-            .error(function (data, status, headers, config) {
-                 $log.warn(data, status, headers(), config)
+            .$promise
+            .then(function (event) {
+                $scope.event = event;
+                console.log("GET returning :" + event);
+            })
+            .catch(function (response) {
+                console.log("failed : " + response);
             });
+        /*
+         directly
+         $scope.event = eventData.getEvent();
+         */
+
+        //not REST - usage with $http
+        /*        eventData.getEvent()
+         .success(function (event) {$scope.event = event})
+         .error(function (data, status, headers, config) {
+         $log.warn(data, status, headers(), config)
+         });*/
 
         $scope.upVoteSession = function (session) {
             session.upVoteCount++;
@@ -23,4 +39,4 @@ eventsApp.controller('EventController',
         $scope.downVoteSession = function (session) {
             session.upVoteCount--;
         }
-    })
+});

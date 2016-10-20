@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(method = RequestMethod.GET)
 public class EventDataController {
 
 	@Autowired
@@ -21,14 +20,20 @@ public class EventDataController {
 		return eventService.getEventFromJsonFile(idx);
 	}
 
+
+	/**
+	 * diff to class example
+	 * @param eventInJson
+	 * @return
+	 */
 	@ResponseBody
-    @RequestMapping(method = RequestMethod.POST, value = "/data/event/{idx}")
-    public Object saveEventData(@PathVariable Integer idx, String eventInJson) {
-		return eventService.saveEventFromJsonFile(idx, eventInJson);
+    @RequestMapping(method = RequestMethod.POST, value = "/data/event/create")
+    public Object saveEventData(String eventInJson) {
+		return eventService.saveNewEventFromJsonFile(eventInJson);
 	}
 
 	@ResponseBody
-	@RequestMapping("/data/events")
+    @RequestMapping(method = RequestMethod.GET, value = "/data/events")
     public String eventData() {
 		return "some events";
 	}
