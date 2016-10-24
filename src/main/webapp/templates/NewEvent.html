@@ -1,0 +1,41 @@
+<div style="padding-left: 20px; padding-right: 20px">
+    <div class="container">
+        <h1>New Event</h1>
+        <form name="newEventForm">
+            <fieldset>
+                <label for="eventName">Event name:</label>
+                <input ng-model="event.name" id="eventName" type="text"
+                       required placeholder="Propose new name"/>
+                <label for="eventDate">Event date:</label>
+                <input ng-model="event.date" id="eventDate" type="text"
+                       required ng-pattern="/\d\d/\d\d/\d\d\d\d/" placeholder="date here (mm/dd/yyyy)"/>
+                <label for="eventTime">Starts at:</label>
+                <input ng-model="event.time" id="eventTime" type="text" placeholder="?"/>
+                <label for="eventLocation">Event location:</label>
+                <input ng-model="event.location.address" id="eventLocation" type="text"
+                       placeholder="Propose the place"/>
+                <br/>
+                <input ng-model="event.location.city" id="eventCity" type="text" class="input-small"
+                       placeholder="City?"/>
+                <input ng-model="event.location.state" id="eventProvince" type="text" class="input-small"
+                       placeholder="Province?"/>
+
+                <label for="eventImageUrl">Event logo:</label>
+                <input ng-model="event.imgUrl" id="eventImageUrl" type="url" class="input-xlarge"
+                       placeholder="Url for image"/>
+
+            </fieldset>
+            <div>{{event.name}}</div>
+
+            <img ng-src="{{event.imgUrl}}" src=""/>
+            <br/>
+            <br/>
+            <button ng-click="saveEvent(event, newEventForm)"
+                    ng-disabled="newEventForm.$invalid"
+                    type="submit" class="btn btn-primary">Save
+            </button>
+            <button ng-click="cancelEdit()" type="button" class="btn btn-default">Cancel</button>
+
+        </form>
+    </div>
+</div>
