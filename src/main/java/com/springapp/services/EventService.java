@@ -55,11 +55,7 @@ public class EventService {
     }
     public boolean saveNewEventFromJsonFile(String eventInJson) {
         try {
-            File targetFolder = ResourceUtils.getFile("classpath:" + THE_PATH);
-            if (!targetFolder.exists()) {
-                targetFolder.createNewFile();
-                LOG.warn("new output folder : " + targetFolder.getAbsolutePath());
-            }
+            File targetFolder = getFileStorage();
 
             int nextId = getNextId(targetFolder);
             File target = new File(targetFolder, nextId + JSON_EXT);
@@ -77,16 +73,57 @@ public class EventService {
         }
     }
 
+    private File getFileStorage() throws IOException {
+        File targetFolder = ResourceUtils.getFile("classpath:" + THE_PATH);
+        if (!targetFolder.exists()) {
+            targetFolder.createNewFile();
+            LOG.warn("new output folder : " + targetFolder.getAbsolutePath());
+        }
+        return targetFolder;
+    }
+
     int getNextId(File targetFolder) {
         File[] files = targetFolder.listFiles();
         //only one type remains
         int jsonCounter = 1;
         for (File file : files) {
-            if (file.getName().contains(JSON_EXT)) {
+            if (isJsonExtension(file)) {
                 jsonCounter++;
-
             }
         }
         return jsonCounter;
+    }
+
+    public String getAllEventsFromJsonFileStorage() {
+        StringBuilder allEventsAsString = new StringBuilder("[");
+        boolean readAnything = false;
+
+        try {
+            File targetFolder = getFileStorage();
+            File[] files = targetFolder.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                File file = files[i];
+                if (isJsonExtension(file)) {
+                    BufferedReader input = new BufferedReader(new FileReader(file));
+                    LOG.info("(all) reading from " + file);
+                    String nextJson = readFile(input);
+                    if (nextJson != null && nextJson.length() > 2) {
+                        readAnything = true;
+                        allEventsAsString.append(nextJson);
+                    }
+                    if (readAnything && i + 1 < files.length) {
+                        allEventsAsString.append(",\n");
+                    }
+                }
+            }
+        } catch (IOException e) {
+            LOG.error("no place for file storage : ", e);
+        } finally {
+            return allEventsAsString.append("]").toString();
+        }
+    }
+
+    private boolean isJsonExtension(File file) {
+        return file.getName().endsWith(JSON_EXT);
     }
 }

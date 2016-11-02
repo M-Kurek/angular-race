@@ -20,6 +20,12 @@ public class EventDataController {
 		return eventService.getEventFromJsonFile(idx);
 	}
 
+	@ResponseBody
+    @RequestMapping(method = RequestMethod.GET, value = "/data/event")
+    public Object readAllEventData() {
+		return eventService.getAllEventsFromJsonFileStorage();
+	}
+
 
 	/**
 	 * diff to class example
@@ -32,10 +38,5 @@ public class EventDataController {
 		return eventService.saveNewEventFromJsonFile(eventInJson);
 	}
 
-	@ResponseBody
-    @RequestMapping(method = RequestMethod.GET, value = "/data/events")
-    public String eventData() {
-		return "some events";
-	}
 
 }
