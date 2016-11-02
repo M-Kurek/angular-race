@@ -1,5 +1,6 @@
 <div style="padding-left: 20px; padding-right: 20px">
     <img ng-src="{{event.imgUrl}}" alt="{{event.name}}"/>
+    <button class="btn" ng-click="reload()">Reload with org data</button>
     <div class="row">
         <div class="span11">
             <h2 ng-bind-template="{{event.name}} at {{event.date}}"></h2>

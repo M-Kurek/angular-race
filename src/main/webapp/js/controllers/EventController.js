@@ -2,7 +2,7 @@
 
 eventsApp.controller('EventController',
 
-  function EventController($scope, eventData, $routeParams) {
+    function EventController($scope, eventData, $routeParams, $route) {
 
         $scope.buttonDisabled = true;
 
@@ -10,8 +10,17 @@ eventsApp.controller('EventController',
         $scope.sortVotesOnly = '-upVoteCount';
         $scope.sortNamesOnly = 'name';
 
-        //with promise
+        $scope.reload = function () {
+            $route.reload();
+        }
 
+        /*
+         console.log('my param example : ' + $route.current.myParam);
+         console.log('query param example : ' + $route.current.params.uKnow);
+         */
+
+        console.log('query for event #' + $route.current.pathParams.eventId);
+        //with promise
         eventData.getEvent($routeParams.eventId)
             .$promise
             .then(function (event) {
@@ -39,4 +48,4 @@ eventsApp.controller('EventController',
         $scope.downVoteSession = function (session) {
             session.upVoteCount--;
         }
-});
+    });
