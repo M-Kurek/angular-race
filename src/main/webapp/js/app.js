@@ -27,5 +27,13 @@ var eventsApp = angular.module('eventsApp', ['ngSanitize', 'ngResource', 'ngRout
                     }
                 }
             });
-        $routeProvider.otherwise({redirectTo : '/events'});
+        $routeProvider.when('/sampleDirective',
+            {
+                templateUrl: 'templates/SampleDirective.html',
+                controller : 'SampleDirectiveController'
+            });
+        $routeProvider.otherwise({
+            //TODO how to LOG : console.log("will redirect after : " + $location.absUrl());
+            redirectTo : '/events'
+        });
     });
