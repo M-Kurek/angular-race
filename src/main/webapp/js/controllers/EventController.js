@@ -20,7 +20,10 @@ eventsApp.controller('EventController',
          */
 
         console.log('query for event #' + $route.current.pathParams.eventId);
-        //with promise
+
+        $scope.event = $route.current.locals.event;
+
+/*        //with promise
         eventData.getEvent($routeParams.eventId)
             .$promise
             .then(function (event) {
@@ -29,7 +32,7 @@ eventsApp.controller('EventController',
             })
             .catch(function (response) {
                 console.log("failed : " + response);
-            });
+            });*/
         /*
          directly
          $scope.event = eventData.getEvent();
