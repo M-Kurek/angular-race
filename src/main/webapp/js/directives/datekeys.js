@@ -6,10 +6,7 @@ eventsApp.directive('dateKeys',
             restrict: 'A',
             link: function (scope, element, attrs, controller) {
                 element.on('keydown', function (event) {
-                    if (isNumeric(event.keyCode) || isForwardSlash(event.keyCode) || isNavigationKeycode(event.keyCode)) {
-                        return true;
-                    }
-                    return false;
+                    return isNumeric(event.keyCode) || isForwardSlash(event.keyCode) || isNavigationKeycode(event.keyCode);
                 })
             }
         };
@@ -17,11 +14,9 @@ eventsApp.directive('dateKeys',
             return keyCode === 191;
         }
         function isNumeric(keyCode) {
-            console.log("1.key : " + keyCode);
             return (keyCode > 47 && keyCode < 58) || (keyCode > 95 && keyCode < 106);
         }
         function isNavigationKeycode(keyCode) {
-            console.log("2.key : " + keyCode);
             switch (keyCode) {
                 case 8: //backspace
                 case 35: //end
