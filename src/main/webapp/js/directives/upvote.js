@@ -1,7 +1,7 @@
 'use strict';
 
 eventsApp.directive('upvote',
-    function ($compile) {
+    function () {
         return {
             restrict: 'E', //one of E,A,C,M (element, attribute, class, comment)
             replace: true,

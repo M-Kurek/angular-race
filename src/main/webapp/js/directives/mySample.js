@@ -1,7 +1,7 @@
 'use strict';
 
 eventsApp.directive('mySample',
-    function ($compile) {
+    function () {
         return {
             restrict: 'C',
             template: "<input type='text' ng-model='sampleData' />{{sampleData}}<br/>",

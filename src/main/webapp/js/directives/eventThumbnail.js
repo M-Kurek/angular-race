@@ -1,7 +1,7 @@
 'use strict';
 
 eventsApp.directive('eventThumbnail',
-    function ($compile) {
+    function () {
         return {
             restrict: 'E',
             replace: true,
