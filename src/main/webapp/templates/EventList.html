@@ -1,11 +1,11 @@
 <div>
     <h1>Events</h1>
     <hr>
-    with directive
     <hr>
     <ul class="thumbnails">
         <li ng-repeat="event in events | orderBy:sortOrder" class="span5">
-            <event-thumbnail />
+            <event-thumbnail event="event"/>
+            <!--<event-thumbnail the-event="event"/> in directive.scope { event : "=theEvent" } -->
         </li>
     </ul>
 </div>
