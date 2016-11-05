@@ -19,6 +19,7 @@ eventsApp.directive('greeting', function () {
     .directive('finnish', function () {
         return {
             restrict: 'A',
+            priority: 1,
             require: 'greeting',
             link: function (scope, element, attrs, controller) {
                 controller.addGreeting('hei');
@@ -28,6 +29,7 @@ eventsApp.directive('greeting', function () {
     .directive('polski', function () {
         return {
             restrict: 'A',
+            priority: 2,
             require: 'greeting',
             link: function (scope, element, attrs, controller) {
                 controller.addGreeting('czesc');
