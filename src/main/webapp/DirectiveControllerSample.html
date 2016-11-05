@@ -11,8 +11,10 @@
     <div finnish polski></div>
 </greeting>
 
-<div repeat-x="5">Hello</div>
-
+<p>
+Repeat this : <input type="text" ng-model="text" />
+<div repeat-x="5" text="{{text}}">{{text}}</div>
+</p>
 <script src="/lib/jquery.min.js"></script>
 <script src="/lib/angular/angular.js"></script>
 <script src="/lib/angular/angular-sanitize.js"></script>
