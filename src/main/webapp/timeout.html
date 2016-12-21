@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appTimeOut">
+<head>
+    <meta charset="UTF-8">
+    <title>try timeout</title>
+    <script src="https://code.angularjs.org/1.6.0/angular.js"></script>
+</head>
+<body>
+abc
+<p><input type="text"></p>
+</body>
+<script>
+var app = angular.module('appTimeOut', []);
+
+app.run(function($rootScope, $document) {
+    console.log('starting run ' + new Date());
+    var eventList = 'keydown keyup click dblclick mousemove DOMMouseScroll mousewheel mousedown touchstart touchmove scroll focus blur DOMMouseScroll';
+    var nowIs = new Date();
+    var lastTime = nowIs.getTime();
+    var idleMillis = 5000;       //20*60*1000 -  20 min from now
+
+    $rootScope.idleEndTime = lastTime + idleMillis;
+    $document.find('body').on(eventList, checkAndResetIdle);
+
+    function checkAndResetIdle() {
+      var nowIs = new Date();
+      var lastTime = nowIs.getTime();
+      if (lastTime > $rootScope.idleEndTime) {
+        $document.find('body').off(eventList);
+        console.log('logout at ' + new Date());
+        alert('logout at ' + new Date());
+      } else {
+        console.log('next end');
+        $rootScope.idleEndTime = lastTime + idleMillis;
+      }
+    }
+});
+
+</script>
+</html>
