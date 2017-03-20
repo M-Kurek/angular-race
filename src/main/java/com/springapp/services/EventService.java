@@ -1,5 +1,7 @@
 package com.springapp.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springapp.model.TrainingEvent;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -37,35 +39,20 @@ public class EventService {
         return builder.toString();
     }
 
-    public String saveEventFromJsonFile(Integer idx, String eventInJson) {
-        try {
-            File target = ResourceUtils.getFile("classpath:" + THE_PATH + idx + JSON_EXT);
-            if (!target.exists()) {
-                return "no place to save : " + idx;
-            }
-            target.delete();
-
-            try (BufferedWriter output = new BufferedWriter(new FileWriter(target));) {
-                output.write(eventInJson);
-                return "saved";
-            }
-        } catch (IOException e) {
-            return "problem saving for " + idx + " : " + e.getMessage();
-        }
-    }
-    public boolean saveNewEventFromJsonFile(String eventInJson) {
+    public boolean saveNewEvent(TrainingEvent eventInJson) {
+        File target;
         try {
             File targetFolder = getFileStorage();
 
             int nextId = getNextId(targetFolder);
-            File target = new File(targetFolder, nextId + JSON_EXT);
+            target = new File(targetFolder, nextId + JSON_EXT);
             target.createNewFile();
             target.setWritable(true);
             LOG.info("next event is : " + target.getAbsolutePath() +
                     ", canWrite : " + target.canWrite());
-            try (BufferedWriter output = new BufferedWriter(new FileWriter(target))) {
-                output.write(eventInJson);
-            }
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(target, eventInJson);
+
             return nextId > 0;
         } catch (IOException e) {
             LOG.error("problem saving event:\n" + eventInJson, e);
@@ -94,9 +81,9 @@ public class EventService {
         return jsonCounter;
     }
 
-    public String getAllEventsFromJsonFileStorage() {
-        StringBuilder allEventsAsString = new StringBuilder("[");
-        boolean readAnything = false;
+    public List<TrainingEvent> getAllEvents() {
+
+        List<TrainingEvent> events = new ArrayList<>();
 
         try {
             File targetFolder = getFileStorage();
@@ -106,20 +93,15 @@ public class EventService {
                 if (isJsonExtension(file)) {
                     BufferedReader input = new BufferedReader(new FileReader(file));
                     LOG.info("(all) reading from " + file);
-                    String nextJson = readFile(input);
-                    if (nextJson != null && nextJson.length() > 2) {
-                        readAnything = true;
-                        allEventsAsString.append(nextJson);
-                    }
-                    if (readAnything && i + 1 < files.length) {
-                        allEventsAsString.append(",\n");
-                    }
+                    ObjectMapper mapper = new ObjectMapper();
+                    TrainingEvent event = mapper.readValue(input, TrainingEvent.class);
+                    events.add(event);
                 }
             }
         } catch (IOException e) {
             LOG.error("no place for file storage : ", e);
         } finally {
-            return allEventsAsString.append("]").toString();
+            return events;
         }
     }
 

@@ -8,10 +8,10 @@ eventsApp.controller('EditEventController',
                 eventData.save(event)
                     .$promise
                     .then(function (response) {
-                        console.log("saved, " + response);
+                        console.log("saved ", response);
                     })
                     .catch(function (response) {
-                        console.log("save failure : " + response);
+                        console.log("save failure : ", response);
                     });
             }
         }
